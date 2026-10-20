@@ -1,0 +1,30 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/render_lib/code/gr/gr_defs.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_rect.h.c"
+#include "../src/rfg/volition/vlib/code/memory/page_mempool.h.c"
+#include "../src/rfg/library/modules/runtime/base/include/keen/base/atomic.hpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_factory_rtti.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_base_object.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_device.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_vertex_format_defines.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_mesh_data.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_material_defines.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_shader_library.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_color.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_primitive_state.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_handle.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_dyn_texture.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_cached_dyn_texture.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_shader.h.c"
+#include "../src/rfg/volition/render_lib/code/kghelper.hpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_render_lib.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_material.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_renderer.h.c"
+#include "../src/rfg/game/build/win32/steam/gog/master/unity_sources/render_lib_unity.cpp.c"

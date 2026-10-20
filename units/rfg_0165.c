@@ -1,0 +1,31 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/havok_20150629/common/base/container/pointermultimap/hkmultimap.cxx.c"
+#include "../src/havok_20150629/common/base/container/substring/hksubstring.cpp.c"
+#include "../src/havok_20150629/common/base/reflection/hkclassupdate.cpp.c"
+#include "../src/havok_20150629/common/base/system/io/writer/offsetonly/hkoffsetonlystreamwriter.cpp.c"
+#include "../src/havok_20150629/common/base/system/io/writer/offsetonly/hkoffsetonlystreamwriter.h.c"
+#include "../src/havok_20150629/common/base/system/io/iarchive/hkiarchive.cpp.c"
+#include "../src/havok_20150629/common/base/system/io/iarchive/hkiarchive.h.c"
+#include "../src/havok_20150629/common/base/math/matrix/hkmatrix4f.cpp.c"
+#include "../src/havok_20150629/common/base/math/matrix/hkmatrix4util.inl.c"
+#include "../src/havok_20150629/common/base/system/io/reader/memory/hkmemorystreamreader.cpp.c"
+#include "../src/havok_20150629/common/base/math/matrix/hkmatrix4util.cpp.c"
+#include "../src/havok_20150629/common/base/math/matrix/hkmatrix4d.inl.c"
+#include "../src/havok_20150629/common/base/math/matrix/hkmatrix4d.cpp.c"
+#include "../src/havok_20150629/common/base/math/qtransform/hkqtransformd.inl.c"
+#include "../src/havok_20150629/common/base/math/matrix/hkrotationd.cpp.c"
+#include "../src/havok_20150629/common/base/math/vector/sse/hkssevector4util_d.inl.c"
+#include "../src/havok_20150629/common/base/math/quaternion/hkquaterniond.inl.c"
+#include "../src/havok_20150629/common/base/math/quaternion/hkquaterniond.cpp.c"
+#include "../src/havok_20150629/common/base/math/matrix/hkmatrix3d.cpp.c"
+#include "../src/havok_20150629/geometry/collide/algorithms/triangle/hkcdtriangleutil.cpp.c"
+#include "../src/havok_20150629/common/internal/misc/hksystemtime.cpp.c"
+#include "../src/havok_20150629/common/internal/geometryprocessing/convexhull/hkgpconvexhull.cpp.c"
+#include "../src/havok_20150629/common/internal/geometryprocessing/topology/hkgptopology.h.c"

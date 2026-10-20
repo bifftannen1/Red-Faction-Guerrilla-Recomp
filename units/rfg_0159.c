@@ -1,0 +1,31 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/havok_20150629/common/serialize/data/hkdataobject.cpp.c"
+#include "../src/havok_20150629/common/serialize/typemanager/hktypemanager.cpp.c"
+#include "../src/havok_20150629/common/base/container/pointermultimap/hkpointermultimap.h.c"
+#include "../src/havok_20150629/common/base/container/pointermultimap/hkmultimap.h.c"
+#include "../src/havok_20150629/common/base/container/stringmap/hkstoragestringmap.h.c"
+#include "../src/havok_20150629/common/serialize/serialize/hkcontentpredicate.cpp.c"
+#include "../src/havok_20150629/common/serialize/util/hkserializedeprecated.cpp.c"
+#include "../src/havok_20150629/common/serialize/util/xml/hkxmlparser.inl.c"
+#include "../src/havok_20150629/common/base/container/substring/hksubstring.h.c"
+#include "../src/havok_20150629/common/base/container/substring/hksubstring.inl.c"
+#include "../src/havok_20150629/common/serialize/util/xml/hkxmlstreamparser.h.c"
+#include "../src/havok_20150629/common/serialize/tagfile/xml/hkxmltagfilereader.cpp.c"
+#include "../src/havok_20150629/common/serialize/util/xml/hkxmlstreamparser.inl.c"
+#include "../src/havok_20150629/common/base/reflection/hkclassmemberaccessor.h.c"
+#include "../src/havok_20150629/common/serialize/data/native/hkdataobjectnative.cpp.c"
+#include "../src/havok_20150629/common/base/container/relarray/hkrelarray.inl.c"
+#include "../src/havok_20150629/common/serialize/data/native/hkdataobjectnative.h.c"
+#include "../src/havok_20150629/common/serialize/serialize/hkrelocationinfo.h.c"
+#include "../src/havok_20150629/common/serialize/packfile/binary/hkbinarypackfilewriter.cpp.c"
+#include "../src/havok_20150629/common/base/system/io/writer/substream/hksubstreamwriter.h.c"
+#include "../src/havok_20150629/common/serialize/packfile/binary/hkbinarypackfilewriter.h.c"
+#include "../src/havok_20150629/common/serialize/packfile/binary/hkpackfileheader.cpp.c"
+#include "../src/havok_20150629/common/serialize/tagfile/xml/hkxmltagfilewriter.cpp.c"

@@ -1,0 +1,33 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/rfg/code/objects/turret_info.cpp.c"
+#include "../src/rfg/volition/rfg/code/objects/turret_internal.cpp.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/common/base/container/array/hksmallarray.inl.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/common/base/memory/allocator/hkmemoryallocator.h.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/physics/constraint/atom/hkpconstraintatom.h.c"
+#include "../src/rfg/volition/rfg/code/objects/object_action_node_enum.h.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/physics2012/dynamics/constraint/atom/hkpmodifierconstraintatom.h.c"
+#include "../src/rfg/volition/rfg/code/objects/humans/human_combat_turret.cpp.c"
+#include "../src/rfg/volition/rfg/code/objects/object_action_node_internal.h.c"
+#include "../src/rfg/volition/rfg/code/objects/object_roadblock_node_internal.h.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/physics/constraint/motor/position/hkppositionconstraintmotor.h.c"
+#include "../src/rfg/volition/rfg/code/objects/gameplay_properties.cpp.c"
+#include "../src/rfg/volition/rfg/code/objects/humans/human_info_shared.cpp.c"
+#include "../src/rfg/volition/rfg/code/objects/movers/object_mover_lists.cpp.c"
+#include "../src/rfg/volition/rfg/code/objects/humans/human_move_knockdown.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_primitive_renderer.h.c"
+#include "../src/rfg/volition/rfg/code/os/dc_menu.cpp.c"
+#include "../src/rfg/game/build/win32/steam/gog/master/unity_sources/rfg_os_unity.cpp.c"
+#include "../src/rfg/volition/rfg/code/os/dlmalloc/dmalloc.cpp.c"
+#include "../src/rfg/volition/rfg/code/os/profile.cpp.c"
+#include "../src/rfg/game/build/win32/steam/gog/master/unity_sources/rfg_pathfinding_unity.cpp.c"
+#include "../src/rfg/volition/rfg/code/pathfinding/bb_pathfinding.cpp.c"
+#include "../src/rfg/volition/rfg/code/pathfinding/nav_cell.cpp.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/physics2012/dynamics/entity/hkpentityactivationlistener.h.c"
+#include "../src/rfg/volition/rfg/code/pathfinding/nav_cell_detour.cpp.c"

@@ -1,0 +1,165 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: rfg <rfg@local>
+Date: Mon, 19 Oct 2026 20:22:43 +0100
+Subject: [PATCH 16/16] rfg: native32 implicit TLS (TIB+0x2C) and loading into
+ a stub EXE's reservation
+
+native32 mapped images itself but never read their TLS directory and left
+TIB+0x2C (ThreadLocalStoragePointer) zero, so every __declspec(thread)
+access (rfg.exe: 309 fs:[2Ch] sites, 2,212-byte template) read through
+null. native32_map now records the first TLS directory (index 0) and every
+guest TIB gets its own template copy behind a one-slot array.
+
+Under WOW64 the kernel places the 64-bit TEB/stack/shared maps at
+0x00DC0000.. at process creation, inside a 0x0397B000-byte image at
+0x00400000, so native32_hold_image cannot hold it. image_loader accepts a
+span that lies inside the process EXE's own image mapping: a stub EXE fixed
+at the guest base with an empty first section as large as the guest
+(rfg_pc_recomp/host/make_stub_exe.py).
+
+Test: rfg_pc_recomp/host/tls_selftest.c through the stub: guest mapped at
+0x00400000 +0x397B000, two threads, distinct blocks equal to the template,
+index 0: RFG_TLS_SELFTEST PASS.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ runtime/native32/native32.c     | 52 +++++++++++++++++++++++++++++++++
+ runtime/native32/native32.h     |  5 ++++
+ runtime/recomp32/image_loader.c | 27 +++++++++++++++++
+ 3 files changed, 84 insertions(+)
+
+diff --git a/runtime/native32/native32.c b/runtime/native32/native32.c
+index 7ed55a7..cf17ad4 100644
+--- a/runtime/native32/native32.c
++++ b/runtime/native32/native32.c
+@@ -124,6 +124,50 @@ static DWORD g_mach_tls = TLS_OUT_OF_INDEXES;
+ /* A guest thread's TIB. Lifted code reads fs:[n] as MEM32(g_fs_base + n); the
+  * real TEB stays the host's, so a guest SEH frame never lands on a chain
+  * Windows walks. The PEB is the real one: code that reads fs:[30h] wants it. */
++/* Implicit TLS (__declspec(thread)) of the guest EXE. MSVC code reads it as
++ * mov eax, fs:[2Ch]; mov eax, [eax + _tls_index*4]; ... so every guest thread
++ * needs ThreadLocalStoragePointer (TIB+0x2C) -> an array whose slot
++ * [_tls_index] is that thread's copy of the image's TLS template. The real
++ * loader does this; native32 maps images itself, so it must too. Recorded by
++ * native32_map from the first mapped module with a TLS directory; that module
++ * gets index 0. RFG: 309 fs:[2Ch] sites, a 2,212-byte template. */
++static struct {
++    uint32_t start, end, zero_fill, index_va, callbacks;
++    int set;
++} g_tls;
++
++static void record_tls(uint32_t base, IMAGE_NT_HEADERS32* nt) {
++    IMAGE_DATA_DIRECTORY dd = nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_TLS];
++    if (!dd.VirtualAddress || !dd.Size) return;
++    IMAGE_TLS_DIRECTORY32* td = (IMAGE_TLS_DIRECTORY32*)(uintptr_t)(base + dd.VirtualAddress);
++    if (g_tls.set) {
++        fprintf(stderr, "native32: second module with a TLS directory at %08X ignored (index 0 taken)\n", base);
++        return;
++    }
++    g_tls.start = td->StartAddressOfRawData;    /* VAs: the image is at its preferred base */
++    g_tls.end = td->EndAddressOfRawData;
++    g_tls.zero_fill = td->SizeOfZeroFill;
++    g_tls.index_va = td->AddressOfIndex;
++    g_tls.callbacks = td->AddressOfCallBacks;
++    if (g_tls.index_va) *(uint32_t*)(uintptr_t)g_tls.index_va = 0;
++    if (g_tls.callbacks && *(uint32_t*)(uintptr_t)g_tls.callbacks)
++        fprintf(stderr, "native32: TLS callbacks present at %08X and NOT run\n", g_tls.callbacks);
++    g_tls.set = 1;
++}
++
++/* This thread's TLS block: a copy of the template plus zero fill, behind a
++ * one-slot pointer array. 0 when no module has TLS. */
++static uint32_t make_tls_array(void) {
++    if (!g_tls.set) return 0;
++    uint32_t tsize = g_tls.end - g_tls.start, total = tsize + g_tls.zero_fill;
++    uint8_t* blk = (uint8_t*)VirtualAlloc(NULL, total + 16, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
++    uint32_t* arr = (uint32_t*)VirtualAlloc(NULL, 0x1000, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
++    if (!blk || !arr) return 0;
++    memcpy(blk, (const void*)(uintptr_t)g_tls.start, tsize);   /* VirtualAlloc zeroes the fill */
++    arr[0] = (uint32_t)(uintptr_t)blk;
++    return (uint32_t)(uintptr_t)arr;
++}
++
+ static uint32_t make_tib(uint32_t lo, uint32_t hi) {
+     uint32_t* t = (uint32_t*)VirtualAlloc(NULL, 0x1000, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+     t[0] = 0xFFFFFFFFu;                          /* ExceptionList: end of chain */
+@@ -131,10 +175,17 @@ static uint32_t make_tib(uint32_t lo, uint32_t hi) {
+     t[2] = lo;                                   /* StackLimit                  */
+     t[0x18 / 4] = (uint32_t)(uintptr_t)t;        /* Self                        */
+     t[0x24 / 4] = GetCurrentThreadId();
++    t[0x2C / 4] = make_tls_array();              /* ThreadLocalStoragePointer   */
+     t[0x30 / 4] = __readfsdword(0x30);
+     return (uint32_t)(uintptr_t)t;
+ }
+ 
++/* For selftests and hosts: this thread's guest TLS slot 0 base, 0 if none. */
++uint32_t native32_tls_block(uint32_t tib) {
++    uint32_t arr = tib ? ((uint32_t*)(uintptr_t)tib)[0x2C / 4] : 0;
++    return arr ? ((uint32_t*)(uintptr_t)arr)[0] : 0;
++}
++
+ typedef struct { regs_t r; int depth; } mstate;
+ 
+ /* Nests: a callback that arrives while this thread is inside a native call
+@@ -356,6 +407,7 @@ uint32_t native32_map(const char* path, uint32_t base) {
+     g_mods[g_mod_n].span = span;
+     strncpy(g_mods[g_mod_n++].name, file ? file + 1 : path, MAX_PATH - 1);
+     IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(uintptr_t)(base + ((IMAGE_DOS_HEADER*)(uintptr_t)base)->e_lfanew);
++    record_tls(base, nt);
+     IMAGE_SECTION_HEADER* s = IMAGE_FIRST_SECTION(nt);
+     for (int i = 0; i < nt->FileHeader.NumberOfSections; i++, s++) {
+         DWORD old;
+diff --git a/runtime/native32/native32.h b/runtime/native32/native32.h
+index 21d3cc7..dea0031 100644
+--- a/runtime/native32/native32.h
++++ b/runtime/native32/native32.h
+@@ -107,6 +107,11 @@ extern int native32_trace_callbacks;  /* one line per Windows -> guest call */
+ /* Guest address ranges known to the runtime (for fault reports). */
+ int native32_in_guest(uint32_t va);
+ 
++/* The guest implicit-TLS block (slot 0 of the array at TIB+0x2C) of the
++ * thread whose guest TIB is `tib` (g_fs_base while it holds the machine);
++ * 0 if no mapped module has a TLS directory. */
++uint32_t native32_tls_block(uint32_t tib);
++
+ /* Called after every native call made through the bridge (imports, COM
+  * methods, GetProcAddress results): the target, the guest's argument slots
+  * (args[0] is a COM method's `this`), and eax. For tracing an API surface --
+diff --git a/runtime/recomp32/image_loader.c b/runtime/recomp32/image_loader.c
+index 106536e..f52a26c 100644
+--- a/runtime/recomp32/image_loader.c
++++ b/runtime/recomp32/image_loader.c
+@@ -60,6 +60,33 @@ uint32_t recomp_load_image(const char* path, uint32_t image_base) {
+         view = VirtualAlloc((void*)(uintptr_t)image_base, span,
+                             MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+     }
++    if (!view) {
++        /* Reserved by the process's own EXE image: a stub EXE fixed at the
++         * guest's base whose first section is an empty reservation as large as
++         * the guest (host/make_stub_exe.py). The kernel maps the main image
++         * before it creates the WOW64 TEB/stack/shared maps, so this is the one
++         * way to hold a large range at 0x00400000 under WOW64, where those
++         * land at 0x00DC0000.. at creation (RFG, a 0x0397B000-byte image).
++         * Accept it only if the whole span is inside that one image mapping. */
++        MEMORY_BASIC_INFORMATION mb;
++        HMODULE exe = GetModuleHandleA(NULL);
++        if ((uint32_t)(uintptr_t)exe == image_base &&
++            VirtualQuery((void*)(uintptr_t)image_base, &mb, sizeof mb) && mb.Type == MEM_IMAGE &&
++            (uint32_t)(uintptr_t)mb.AllocationBase == image_base) {
++            uint32_t a = image_base, ok = 1;
++            while (ok && a < image_base + span) {
++                ok = VirtualQuery((void*)(uintptr_t)a, &mb, sizeof mb) && mb.Type == MEM_IMAGE &&
++                     (uint32_t)(uintptr_t)mb.AllocationBase == image_base && mb.State == MEM_COMMIT;
++                a = (uint32_t)(uintptr_t)mb.BaseAddress + (uint32_t)mb.RegionSize;
++            }
++            DWORD old;
++            if (ok && VirtualProtect((void*)(uintptr_t)image_base, span, PAGE_READWRITE, &old)) {
++                view = (void*)(uintptr_t)image_base;
++                fprintf(stderr, "[loader] guest loaded into the stub EXE's reservation @ 0x%08X (+0x%X)\n",
++                        image_base, span);
++            }
++        }
++    }
+     if (!view) {
+         fprintf(stderr, "[loader] VirtualAlloc fixed @ 0x%08X failed (link host at a high base)\n",
+                 image_base);

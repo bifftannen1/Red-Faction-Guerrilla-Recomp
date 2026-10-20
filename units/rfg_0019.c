@@ -1,0 +1,33 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/render_lib/code/rl_aabb.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_sphere.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_bvolume.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_frustum.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_named_object.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_3d_entity.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_partition_system.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_scene_entity.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_camera.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_draw.h.c"
+#include "../src/rfg/volition/render_lib/code/gr/gr.cpp.c"
+#include "../src/rfg/volition/render_lib/code/gr/grd.cpp.c"
+#include "../src/rfg/volition/render_lib/code/gr/gr_3d.cpp.c"
+#include "../src/rfg/volition/render_lib/code/gr/gr_3d_clipper.cpp.c"
+#include "../src/rfg/volition/render_lib/code/gr/gr_font.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_aabb.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_instance_stream.h.c"
+#include "../src/rfg/volition/vlib/code/os/atomic.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_lf_hash.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_batched_pass.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_renderer_metrics.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_renderable.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_mesh.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_callback_widget.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_renderable_instance.h.c"

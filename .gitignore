@@ -1,0 +1,29 @@
+# Build outputs
+/build/
+/out/
+/thirdparty/
+*.obj
+*.o
+*.exe
+*.dll
+*.lib
+*.exp
+*.ilk
+*.pch
+__pycache__/
+*.pyc
+
+# The game itself: never commit
+*.pdb
+rfg.exe
+*.vpp_pc
+*.str2_pc
+*.bin
+/data/
+
+# Runtime state written next to the exe / by the user
+*.log
+rfg_unresolved.log
+rfg_sample.tsv
+*.png
+!/docs/screenshot.png

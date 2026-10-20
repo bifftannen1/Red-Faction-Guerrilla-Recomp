@@ -1,0 +1,30 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/vlib/code/parse/parse.cpp.c"
+#include "../src/rfg/volition/vlib/code/parse/xml_table_tools.cpp.c"
+#include "../src/rfg/volition/vlib/code/time/timestamp.cpp.c"
+#include "../src/rfg/volition/vlib/code/time/timestamp_accurate.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/bitarray.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/bit_stream.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/fastxml.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/hash_table.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/priority_queue_linear.h.c"
+#include "../src/rfg/volition/vlib/code/util/priority_queue_linear.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/recursive_bbox.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/rule_file.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/solid_bsp.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/string_comp.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/string_pool.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/string_util.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/unicode_tools.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/varray.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/vfont.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/vlib_version.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/xml_util.cpp.c"
+#include "../src/rfg/volition/vlib/code/util/zlib_vlib.cpp.c"

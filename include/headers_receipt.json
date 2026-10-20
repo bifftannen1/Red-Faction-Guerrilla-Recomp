@@ -1,0 +1,37 @@
+{
+ "compile_errors": [],
+ "compile_rc": 0,
+ "controls": {
+  "offsetof": {
+   "error": "C:\\Users\\halox\\Downloads\\rfg_pc_recomp\\work\\pdb_headers_ctrl\\ctrl_offsetof.hpp:244654:15: error: static assertion failed due to requirement '__builtin_offsetof(connectdata, cselect_bits) == 1609': con",
+   "failed": true,
+   "line": "static_assert(offsetof(struct connectdata, cselect_bits) == 1608"
+  },
+  "sizeof": {
+   "error": "C:\\Users\\halox\\Downloads\\rfg_pc_recomp\\work\\pdb_headers_ctrl\\ctrl_sizeof.hpp:248128:15: error: static assertion failed due to requirement 'sizeof(hkcdDynamicTree__CodecRaw_unsigned_int) == 49': hkcdDy",
+   "failed": true,
+   "line": "static_assert(sizeof(struct hkcdDynamicTree__CodecRaw_unsigned_int) == 48"
+  }
+ },
+ "enum_defs": 4583,
+ "files_changed": 0,
+ "seconds": 12.7,
+ "static_asserts": {
+  "offsetof": 71993,
+  "sizeof": 18824
+ },
+ "stats": {
+  "bitfield_members": 1815,
+  "distinct_layouts_same_name": 144,
+  "duplicate_identical_definitions": 417,
+  "empty_bases_omitted": 110,
+  "enums": 4581,
+  "members_as_bytes": 491,
+  "protos": 125727,
+  "protos_missing": 1260,
+  "udts": 18824,
+  "udts_overlay": 127
+ },
+ "tpi_records": 288008,
+ "udt_defs": 19239
+}

@@ -1,0 +1,29 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/rfg/code/code_effects/dust.cpp.c"
+#include "../src/rfg/volition/rfg/code/code_effects/explosion.cpp.c"
+#include "../src/rfg/volition/rfg/code/code_effects/explosion_shared.cpp.c"
+#include "../src/rfg/volition/rfg/code/code_effects/glare.cpp.c"
+#include "../src/rfg/volition/rfg/code/code_effects/glass.cpp.c"
+#include "../src/rfg/volition/rfg/code/code_effects/los_blocker.cpp.c"
+#include "../src/rfg/volition/rfg/code/code_effects/material_effects.cpp.c"
+#include "../src/rfg/volition/rfg/code/code_effects/material_effects_shared.cpp.c"
+#include "../src/rfg/volition/rfg/code/code_effects/material_preload_shared.cpp.c"
+#include "../src/rfg/volition/rfg/code/code_effects/tracers.cpp.c"
+#include "../src/rfg/volition/rfg/code/code_effects/xray_effect.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_utility.h.c"
+#include "../src/rfg/volition/rfg/code/destruction/rfg_shape_cutter.h.c"
+#include "../src/rfg/volition/rfg/code/code_effects/distortion_effect.cpp.c"
+#include "../src/rfg/volition/rfg/code/control/control_map.h.c"
+#include "../src/rfg/volition/rfg/code/control/control.cpp.c"
+#include "../src/rfg/volition/rfg/code/control/control_cheats.cpp.c"
+#include "../src/rfg/game/build/win32/steam/gog/master/unity_sources/rfg_control_unity.cpp.c"
+#include "../src/rfg/volition/rfg/code/control/control_gameplay.cpp.c"
+#include "../src/rfg/volition/rfg/code/control/control_map_bind_internal.h.c"
+#include "../src/rfg/volition/rfg/code/control/control_map.cpp.c"

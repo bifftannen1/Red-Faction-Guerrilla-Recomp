@@ -1,0 +1,94 @@
+{
+ "closure_added_insns": 769,
+ "cnames": {
+  "reserved_identifiers": 949795,
+  "rules": {
+   "overload_va": 8808,
+   "pdb_name": 118069,
+   "reserved_va": 110
+  },
+  "total": 126987
+ },
+ "data": {
+  "branch_targets": 505616,
+  "image_addr_operands": 375381,
+  "named": 372241,
+  "unresolved": 3140
+ },
+ "frame": {
+  "ambiguous": 15,
+  "fn_conflict": 395,
+  "in_conflict_fn": 9528,
+  "named": 286882,
+  "records_placed": 140374,
+  "records_refused": {
+   "regrel_r20_fpo_and": 7,
+   "regrel_r22_fpo": 236,
+   "regrel_r22_fpo_and": 44
+  },
+  "stack_operands": 485419,
+  "unknown_base": 272,
+  "unnamed_slot": 141974
+ },
+ "functions": 126987,
+ "functions_with_pdb_proc": 126396,
+ "icalls": {
+  "import_": 6517,
+  "no_callsite": 0,
+  "slot_type_mismatch": 0,
+  "total": 33542,
+  "typed": 10378,
+  "virtual_named": 16647
+ },
+ "insn_decode_mismatch": 0,
+ "labels": 429,
+ "lines": {
+  "annotations_written": 693363,
+  "distinct_starts": 655925,
+  "records": 693513,
+  "starts_on_lifted_insn": 655797
+ },
+ "seconds": 269.7,
+ "stats": {
+  "annotations_unanchored": 534,
+  "ebp_general_register_operands": 21554,
+  "esp_lost_at_call_direct": 45,
+  "esp_lost_at_leave": 1,
+  "esp_lost_at_mov": 78,
+  "esp_lost_at_pop": 1,
+  "esp_lost_at_sub": 1,
+  "esp_lost_at_xchg": 2,
+  "fn_frame_conflict": 395,
+  "frame_record_refused_regrel_r20_fpo_and": 7,
+  "frame_record_refused_regrel_r22_fpo": 236,
+  "frame_record_refused_regrel_r22_fpo_and": 44,
+  "frame_records_placed": 140374,
+  "icalls": 33542,
+  "icalls_import": 6517,
+  "icalls_typed": 10378,
+  "icalls_virtual_named": 16647,
+  "image_addr_branch_targets": 505616,
+  "image_addr_named": 372241,
+  "image_addr_operands": 375381,
+  "image_addr_unresolved": 3140,
+  "insn_fallthrough_missing": 15,
+  "insns_unanchored": 769,
+  "stack_operands": 485419,
+  "stack_operands_ambiguous": 15,
+  "stack_operands_conflict_fn": 9528,
+  "stack_operands_named": 286882,
+  "stack_operands_named_shared_slot": 46748,
+  "stack_operands_unknown_base": 272,
+  "stack_operands_unnamed": 141974,
+  "vcall_miss_mem_form": 13,
+  "vcall_miss_reg_def_not_in_block": 92,
+  "vcall_miss_sig_mismatch": 81,
+  "vcall_miss_vptr_at_nonzero_offset": 337,
+  "vcall_miss_vptr_def_not_found": 126,
+  "vcall_miss_vptr_global_not_of_call_class": 3614,
+  "vcall_miss_vptr_not_a_load": 38,
+  "vcall_vtable_entry_name_agrees": 6485,
+  "vcall_vtable_entry_name_differs": 636,
+  "vcall_vtable_entry_purecall": 7431
+ }
+}

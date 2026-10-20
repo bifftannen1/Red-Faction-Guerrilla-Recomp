@@ -1,0 +1,3 @@
+upstream https://github.com/sp00nznet/pcrecomp
+base     637c723345b38ca2d0fc599f52e831a3e58c30ea
+patched  2f01881fa50baf2059c20dd089a729f242687a79 (local branch rfg; apply sdk/patches/*.patch with git am)

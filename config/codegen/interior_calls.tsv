@@ -1,0 +1,3 @@
+va	size	kind	name
+0x00FB3D44	9	CALL_INTO_BODY	_onexit+0x98
+0x00FB4631	24	CALL_INTO_BODY	`eh vector destructor iterator'+0x4B

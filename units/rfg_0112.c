@@ -1,0 +1,29 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/anim_lib/code/anim_lib_spinebend.cpp.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle.h.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system_filter.h.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system_filter_wind.h.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system_emitter_point.h.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system_filter_magnet.h.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system_filter_turbulence.h.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system_filter_vortex.h.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system_filter_orientor.h.c"
+#include "../src/rfg/volition/vfxlib/code/vfx.cpp.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_renderable_filter_instance.h.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_effect.cpp.c"
+#include "../src/rfg/game/build/win32/steam/gog/master/unity_sources/vfxlib_unity.cpp.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_effect_expressions.cpp.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_effect_manager.cpp.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_effect_template.cpp.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system.cpp.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system_emitter.cpp.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system_emitter_box.cpp.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system_emitter_cylinder.cpp.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system_emitter_instance.cpp.c"

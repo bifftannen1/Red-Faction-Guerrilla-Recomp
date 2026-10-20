@@ -1,0 +1,2 @@
+va	size	kind	name	reason
+0x00fb3da6	22	INTERIOR	__alloca_probe_8	S_PUB32 inside _alloca_probe_16 (0xfb3d90, 44 bytes); size = parent end - entry

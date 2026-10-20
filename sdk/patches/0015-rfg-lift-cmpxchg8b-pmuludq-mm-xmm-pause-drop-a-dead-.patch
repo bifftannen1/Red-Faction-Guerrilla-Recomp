@@ -1,0 +1,111 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: rfg <rfg@local>
+Date: Mon, 19 Oct 2026 20:11:23 +0100
+Subject: [PATCH 15/16] rfg: lift cmpxchg8b, pmuludq (mm/xmm), pause; drop a
+ dead duplicate lahf branch
+
+rfg.exe reachable census after the NFSU2 series left 69 gap sites; three
+forms are real code: pmuludq xmm (20, Havok hkInt64Vector4), lock
+cmpxchg8b (7, keen::atomicSetSint64), pause (7, spin waits). cmpxchg8b
+changes only ZF, so the flags become an exact FK_EFLAGS word as popfd does.
+
+difftest: 6 new cases; each fails on the previous lifter (control) and
+matches Unicorn after.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ tools/lift/difftest.py | 14 ++++++++++++++
+ tools/lift/lift32.py   | 20 ++++++++++++++++----
+ tools/lift/simd32.py   | 11 +++++++++--
+ 3 files changed, 39 insertions(+), 6 deletions(-)
+
+diff --git a/tools/lift/difftest.py b/tools/lift/difftest.py
+index a593acf..69c1c28 100644
+--- a/tools/lift/difftest.py
++++ b/tools/lift/difftest.py
+@@ -706,6 +706,20 @@ CASES = [
+     Case('lahf.after-cmp-equal', bytes.fromhex('39c89f'), {'eax': 0x55, 'ecx': 0x55}),
+     Case('lahf.after-add-aux', bytes.fromhex('01c89f'), {'eax': 0x0F, 'ecx': 0x01}),
+     Case('lahf.after-stc', bytes.fromhex('f99f')),
++    # rfg: lock cmpxchg8b [esi] after stc -- only ZF may change (CF must survive)
++    Case('rfg.lock.cmpxchg8b.equal', bytes.fromhex('f9f00fc70e'),
++         regs={'eax': 5, 'edx': 6, 'ebx': 7, 'ecx': 8},
++         mem={SCRATCH: (5).to_bytes(4, 'little') + (6).to_bytes(4, 'little')}),
++    Case('rfg.lock.cmpxchg8b.differ', bytes.fromhex('f9f00fc70e'),
++         regs={'eax': 5, 'edx': 6, 'ebx': 7, 'ecx': 8},
++         mem={SCRATCH: (9).to_bytes(4, 'little') + (10).to_bytes(4, 'little')}),
++    Case('rfg.lock.cmpxchg8b.high-differs', bytes.fromhex('f00fc70e'),
++         regs={'eax': 5, 'edx': 6, 'ebx': 7, 'ecx': 8},
++         mem={SCRATCH: (5).to_bytes(4, 'little') + (0x80000006).to_bytes(4, 'little')}),
++    # rfg: pmuludq (xmm and mm forms) and pause
++    Case('rfg.sse2.pmuludq', bytes.fromhex('f30f6f4620f30f6f4e30660ff4c1f30f7f07'), mem=SIMD_MEM),
++    Case('rfg.mmx.pmuludq-mem', bytes.fromhex('0f6f46200ff446300f7f070f77'), mem=SIMD_MEM),
++    Case('rfg.pause', bytes.fromhex('f390'), regs={'eax': 3}),
+     # --- MMX / SSE / SSE2 (simd32.py): results stored to [edi] so memory compares them ---
+     Case('sse.mulps', bytes.fromhex('0f10060f104e100f59c10f11070f114f10'), mem=SIMD_MEM),
+     Case('sse.addps-mem', bytes.fromhex('0f10060f5846100f10c80f5c0e0f11070f114f10'), mem=SIMD_MEM),
+diff --git a/tools/lift/lift32.py b/tools/lift/lift32.py
+index 019d801..0a0bd94 100644
+--- a/tools/lift/lift32.py
++++ b/tools/lift/lift32.py
+@@ -1897,10 +1897,22 @@ class Lifter:
+                          f"else {{ {acc_w}; }} }} {comment}")
+             self._flag_state = ('cmp', "_flag_a, _flag_b")
+ 
+-        elif m == 'lahf':
+-            # AH <- SF:ZF:0:AF:0:PF:1:CF, derived from the lazy state. Bit 1
+-            # reads as 1 on every x86. Flags are unchanged.
+-            lines.append(f"SET_HI8(eax, (recomp_eflags(_flag_k, _flag_a, _flag_b, _cf, _df) & 0xD5u) | 2u); {comment}")
++        # (A second, identical `lahf` branch from NFSU2 patch 0004 stood here,
++        # unreachable behind the upstream one at the top of this chain.)
++        elif m == 'cmpxchg8b' and len(ops) == 1:
++            # Compare EDX:EAX with m64. Equal: ZF=1 and m64 = ECX:EBX; else
++            # ZF=0 and EDX:EAX = m64. Only ZF changes, so the current flags
++            # become an exact word (FK_EFLAGS, as popfd) with bit 6 set/cleared.
++            # InterlockedCompareExchange64 / keen::atomicSetSint64 (RFG: 7
++            # sites); the machine lock makes the read-modify-write atomic.
++            a = self._fmt_mem_addr(ops[0].mem)
++            lines.append(f"{{ uint32_t _ad = {a}, _lo = MEM32(_ad), _hi = MEM32(_ad + 4u); "
++                         f"uint32_t _fl = recomp_eflags(_flag_k, _flag_a, _flag_b, _cf, _df); {comment}")
++            lines.append("  if (_lo == eax && _hi == edx) { MEM32(_ad) = ebx; MEM32(_ad + 4u) = ecx; _fl |= 0x40u; }")
++            lines.append("  else { eax = _lo; edx = _hi; _fl &= ~0x40u; }")
++            lines.append("  _flag_k = FK_EFLAGS; _flag_a = _fl; _flag_b = 0; _cf = _fl & 1u; }")
++            self._flag_state = None
++            self._flag_seq += 1
+ 
+         elif m in ('fnstenv', 'fstenv'):
+             # The 28-byte protected-mode environment: CW, SW, TW, then the last
+diff --git a/tools/lift/simd32.py b/tools/lift/simd32.py
+index 6dbbe2f..f79e5b0 100644
+--- a/tools/lift/simd32.py
++++ b/tools/lift/simd32.py
+@@ -67,13 +67,13 @@ for _h, _hi in (("l", False), ("h", True)):
+         PUNPCK["punpck" + _h + _w] = (_b, _hi)
+ MOV128 = {"movaps", "movups", "movapd", "movupd", "movdqa", "movdqu",
+           "movntps", "movntpd", "movntdq"}
+-NOOPS = {"emms", "femms", "sfence", "lfence", "mfence", "prefetchnta",
++NOOPS = {"pause", "emms", "femms", "sfence", "lfence", "mfence", "prefetchnta",
+          "prefetcht0", "prefetcht1", "prefetcht2", "prefetch", "prefetchw"}
+ OTHER = {"movss", "movsd", "movq", "movd", "movlps", "movlpd", "movhps", "movhpd",
+          "movhlps", "movlhps", "movq2dq", "movdq2q", "movntq", "movmskps",
+          "movmskpd", "pmovmskb", "pextrw", "pinsrw", "shufps", "shufpd", "pshufd",
+          "pshuflw", "pshufhw", "pshufw", "unpcklps", "unpckhps", "unpcklpd",
+-         "unpckhpd", "pslldq", "psrldq", "pmaddwd", "psadbw",
++         "unpckhpd", "pslldq", "psrldq", "pmaddwd", "pmuludq", "psadbw",
+          "sqrtps", "sqrtpd", "sqrtss", "sqrtsd", "rcpps", "rcpss", "rsqrtps",
+          "rsqrtss", "minps", "maxps", "minpd", "maxpd", "minss", "maxss", "minsd",
+          "maxsd", "ucomiss", "comiss", "ucomisd", "comisd",
+@@ -318,6 +318,13 @@ class SimdEmitter:
+             parts = " ".join(f"_r.i32[{i}] = (int32_t)((int32_t)_d.i16[{2*i}] * _s.i16[{2*i}] + (int32_t)_d.i16[{2*i+1}] * _s.i16[{2*i+1}]);"
+                              for i in range(n))
+             return [f"{{ V128 _s = {self.vread(s, w)}; V128 _d = {self.vread(d)}; V128 _r = _d; {parts} {self.vwrite(d, '_r')} }}"]
++        if m == "pmuludq":
++            # Unsigned 32x32->64 of the low dword of each qword lane (one lane
++            # for mm, two for xmm). Havok's hkInt64Vector4 (RFG: 20 sites).
++            w = self.width(d)
++            parts = " ".join(f"_r.u64[{i}] = (uint64_t)_d.u32[{2*i}] * (uint64_t)_s.u32[{2*i}];"
++                             for i in range(w // 64))
++            return [f"{{ V128 _s = {self.vread(s, w)}; V128 _d = {self.vread(d)}; V128 _r = _d; {parts} {self.vwrite(d, '_r')} }}"]
+         if m == "psadbw":
+             w = self.width(d)
+             groups = w // 64

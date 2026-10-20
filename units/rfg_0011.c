@@ -1,0 +1,32 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/interface_lib/code/vhashtable.inl.c"
+#include "../src/rfg/volition/vlib/code/util/vfont.h.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_bitmap.h.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_bitmap_circle.h.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_map.h.c"
+#include "../src/rfg/library/modules/thirdparty/platform/win32/compiler/msvc/vc16004021901/include/string.h.c"
+#include "../src/rfg/library/modules/runtime/base/sources/win32/atomic_win32.hpp.c"
+#include "../src/rfg/volition/vlib/code/os/cs_wrapper.h.c"
+#include "../src/rfg/volition/vlib/code/math/vector3.h.c"
+#include "../src/rfg/volition/vlib/code/util/hash_table.h.c"
+#include "../src/rfg/volition/stream2/code/stream2_os.h.c"
+#include "../src/rfg/library/modules/runtime/sound/include/keen/sound/soundsystem.hpp.c"
+#include "../src/rfg/volition/audio_lib/code/stub/audiolib_stub_types.h.c"
+#include "../src/rfg/volition/audio_lib/code/audiolib_att_loop_rel.h.c"
+#include "../src/rfg/volition/audio_lib/code/audiolib_music.h.c"
+#include "../src/rfg/volition/audio_lib/code/audiolib_thread.h.c"
+#include "../src/rfg/volition/audio_lib/code/audiolib_soundbank.h.c"
+#include "../src/rfg/volition/audio_lib/code/audiolib_vehicle_engine.h.c"
+#include "../src/rfg/game/build/win32/steam/gog/master/unity_sources/audio_lib_unity.cpp.c"
+#include "../src/rfg/volition/vlib/code/time/timestamp.h.c"
+#include "../src/rfg/volition/audio_lib/code/audiolib.cpp.c"
+#include "../src/rfg/volition/audio_lib/code/audiolib_3d_calculate.cpp.c"
+#include "../src/rfg/library/modules/runtime/math/sources/global/vector3.inl.c"
+#include "../src/rfg/volition/audio_lib/code/audiolib_att_loop_rel.cpp.c"

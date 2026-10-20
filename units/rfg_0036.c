@@ -1,0 +1,33 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/rfg/code/ai/ai_system.h.c"
+#include "../src/rfg/volition/rfg/code/objects/humans/human_combat_turret.h.c"
+#include "../src/rfg/volition/rfg/code/objects/humans/npc.h.c"
+#include "../src/rfg/volition/rfg/code/pathfinding/nav_cell.h.c"
+#include "../src/rfg/volition/rfg/code/vehicle_ai/vehicle_ai.h.c"
+#include "../src/rfg/volition/rfg/code/vehicle/vehicle_interaction.h.c"
+#include "../src/rfg/volition/rfg/code/vehicle/vehicle_class.h.c"
+#include "../src/rfg/volition/rfg/code/ai/goals.h.c"
+#include "../src/rfg/volition/rfg/code/ai/ai_defense_coordination_internal.cpp.c"
+#include "../src/rfg/volition/rfg/code/ai/ai_planning_data.cpp.c"
+#include "../src/rfg/volition/rfg/code/ai/ai_rate_limiters.h.c"
+#include "../src/rfg/volition/rfg/code/ai/ai_rate_limiters.cpp.c"
+#include "../src/rfg/volition/rfg/code/vehicle/automobile.h.c"
+#include "../src/rfg/volition/rfg/code/vehicle/vehicle_flyer.h.c"
+#include "../src/rfg/volition/rfg/code/objects/object_squad.h.c"
+#include "../src/rfg/volition/rfg/code/objects/object_dummy.h.c"
+#include "../src/rfg/volition/rfg/code/objects/turret.h.c"
+#include "../src/rfg/volition/rfg/code/ai/ai_scripting.cpp.c"
+#include "../src/rfg/volition/rfg/code/ai/ai_script_actions.cpp.c"
+#include "../src/rfg/volition/rfg/code/objects/humans/npc_sound_info.h.c"
+#include "../src/rfg/volition/rfg/code/ai/custom_actions.h.c"
+#include "../src/rfg/volition/rfg/code/ai/formation.h.c"
+#include "../src/rfg/volition/rfg/code/gameplay/gameflow/gfm_orders_manager.h.c"
+#include "../src/rfg/volition/rfg/code/objects/humans/human_combat_cover.h.c"
+#include "../src/rfg/volition/rfg/code/gameplay/object_district.h.c"

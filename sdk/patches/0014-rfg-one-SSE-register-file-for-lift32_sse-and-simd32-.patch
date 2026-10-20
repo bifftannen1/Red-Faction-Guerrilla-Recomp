@@ -1,0 +1,83 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: rfg <rfg@local>
+Date: Mon, 19 Oct 2026 20:05:30 +0100
+Subject: [PATCH 14/16] rfg: one SSE register file for lift32_sse and simd32
+ (V128 = xmm_t)
+
+Applying NFSU2 patch 0002 (simd32) onto 637c723 left two declarations of
+g_xmm/g_mxcsr with different types (upstream xmm_t, simd32 V128): difftest
+failed to compile with 20 errors. xmm_t gains the i8/i64 views simd32 uses,
+V128 aliases it, and difftest's prelude declares the register file once.
+
+Gates after: difftest 416/416, controls PASS, py tests 25/25, C selftests 5/5.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ runtime/recomp32/recomp_simd.h  | 20 +++++---------------
+ runtime/recomp32/recomp_types.h |  2 ++
+ tools/lift/difftest.py          |  3 ---
+ 3 files changed, 7 insertions(+), 18 deletions(-)
+
+diff --git a/runtime/recomp32/recomp_simd.h b/runtime/recomp32/recomp_simd.h
+index a4518ba..050e9a7 100644
+--- a/runtime/recomp32/recomp_simd.h
++++ b/runtime/recomp32/recomp_simd.h
+@@ -15,21 +15,11 @@
+ #include <string.h>
+ #include <math.h>
+ 
+-typedef union {
+-    float    f32[4];
+-    double   f64[2];
+-    uint8_t  u8[16];
+-    int8_t   i8[16];
+-    uint16_t u16[8];
+-    int16_t  i16[8];
+-    uint32_t u32[4];
+-    int32_t  i32[4];
+-    uint64_t u64[2];
+-    int64_t  i64[2];
+-} V128;
+-
+-extern V128     g_xmm[8];
+-extern uint32_t g_mxcsr;          /* only the rounding field (bits 13-14) is honoured */
++/* One register file for both SSE emitters (lift32_sse.py and simd32.py):
++ * V128 is the upstream xmm_t, which carries every lane view simd32 uses.
++ * g_xmm and g_mxcsr are declared once, in recomp_types.h. */
++typedef xmm_t V128;
++typedef char recomp_v128_is_16_bytes[sizeof(V128) == 16 ? 1 : -1];   /* C89-safe static assert (MSVC C mode) */
+ 
+ static inline V128 v128_q(uint64_t q) { V128 v; v.u64[0] = q; v.u64[1] = 0; return v; }
+ static inline V128 v128_d(uint32_t d) { V128 v; memset(&v, 0, sizeof v); v.u32[0] = d; return v; }
+diff --git a/runtime/recomp32/recomp_types.h b/runtime/recomp32/recomp_types.h
+index 7f7ee91..385be5e 100644
+--- a/runtime/recomp32/recomp_types.h
++++ b/runtime/recomp32/recomp_types.h
+@@ -956,11 +956,13 @@ typedef union {
+     float    f32[4];
+     double   f64[2];
+     uint64_t u64[2];
++    int64_t  i64[2];   /* simd32 view (recomp_simd.h aliases V128 to xmm_t) */
+     uint32_t u32[4];
+     int32_t  i32[4];
+     uint16_t u16[8];
+     int16_t  i16[8];
+     uint8_t  u8[16];
++    int8_t   i8[16];   /* simd32 view */
+ } xmm_t;
+ 
+ extern xmm_t    g_xmm[8];
+diff --git a/tools/lift/difftest.py b/tools/lift/difftest.py
+index 579f287..a593acf 100644
+--- a/tools/lift/difftest.py
++++ b/tools/lift/difftest.py
+@@ -985,9 +985,6 @@ xmm_t    g_xmm[8];
+ uint32_t g_mxcsr = 0x1F80;
+ ptrdiff_t g_mem_base;
+ void recomp_dump_trace(const char *why) { (void)why; }
+-V128 g_xmm[8];
+-uint64_t g_mm[8];
+-uint32_t g_mxcsr = 0x1F80;
+ void recomp_unimpl(uint32_t va, const char *w) { printf("UNIMPL %%08X %%s\n", va, w); exit(5); }
+ 
+ #define WIN_BASE 0x%08Xu

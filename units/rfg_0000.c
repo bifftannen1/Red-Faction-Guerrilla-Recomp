@@ -1,0 +1,30 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/vlogger_lib/logger_stubs.cpp.c"
+#include "../src/rfg/library/modules/thirdparty/tlsf/tlsfbits.h.c"
+#include "../src/rfg/library/modules/thirdparty/tlsf/tlsf.c.c"
+#include "../src/rfg/library/modules/thirdparty/platform/win32/compiler/msvc/vc16004021901/include/math.h.c"
+#include "../src/rfg/library/modules/runtime/linkedresources/source/linkedresources.cpp.c"
+#include "../src/rfg/library/modules/runtime/base/include/keen/base/ioresult.hpp.c"
+#include "../src/rfg/library/modules/thirdparty/emgiec/emgiec_steam_142/sdk/public/steam/steam_api.h.c"
+#include "../src/rfg/library/modules/thirdparty/emgiec/emgiec_steam_142/sdk/public/steam/steam_api_internal.h.c"
+#include "../src/rfg/library/modules/thirdparty/platform/win32/compiler/msvc/vc16004021901/include/new.c"
+#include "../src/rfg/library/modules/runtime/steam/sources/global/steamworkssystem.cpp.c"
+#include "../src/rfg/library/modules/runtime/base/include/keen/base/memoryallocator.hpp.c"
+#include "../src/rfg/library/modules/runtime/sound/soundformat/sources/global/soundfileheader.cpp.c"
+#include "../src/rfg/library/modules/runtime/sound/soundformat/sources/global/soundfileheader_vov.cpp.c"
+#include "../src/rfg/library/modules/thirdparty/zlib/zlib123/src/adler32.c.c"
+#include "../src/rfg/library/modules/thirdparty/zlib/zlib123/src/compress.c.c"
+#include "../src/rfg/library/modules/thirdparty/zlib/zlib123/src/deflate.c.c"
+#include "../src/rfg/library/modules/thirdparty/zlib/zlib123/src/gzio.c.c"
+#include "../src/rfg/library/modules/thirdparty/zlib/zlib123/src/infback.c.c"
+#include "../src/rfg/library/modules/thirdparty/zlib/zlib123/src/inffast.c.c"
+#include "../src/rfg/library/modules/thirdparty/zlib/zlib123/src/inflate.c.c"
+#include "../src/rfg/library/modules/thirdparty/zlib/zlib123/src/inftrees.c.c"
+#include "../src/rfg/library/modules/thirdparty/zlib/zlib123/src/trees.c.c"

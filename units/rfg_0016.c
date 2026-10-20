@@ -1,0 +1,29 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/stream2/code/stream2_allocator.h.c"
+#include "../src/rfg/game/build/win32/steam/gog/master/unity_sources/stream2_unity.cpp.c"
+#include "../src/rfg/volition/stream2/code/stream2_container.h.c"
+#include "../src/rfg/volition/vlib/code/memory/split_mempool.h.c"
+#include "../src/rfg/volition/stream2/code/stream2.cpp.c"
+#include "../src/rfg/volition/stream2/code/stream2_allocator.cpp.c"
+#include "../src/rfg/volition/stream2/code/stream2_container.cpp.c"
+#include "../src/rfg/volition/stream2/code/stream2_os.cpp.c"
+#include "../src/rfg/volition/stream2/code/stream2_prim.cpp.c"
+#include "../src/rfg/library/modules/runtime/base/include/keen/base/types.hpp.c"
+#include "../src/rfg/library/modules/runtime/base/sources/global/float32_implementation.hpp.c"
+#include "../src/rfg/library/modules/runtime/base/include/keen/base/assert.hpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_sampling_offsets.h.c"
+#include "../src/rfg/library/modules/runtime/base/sources/global/memory.inl.c"
+#include "../src/rfg/library/modules/runtime/math/include/keen/math/angle.hpp.c"
+#include "../src/rfg/library/modules/runtime/math/sources/global/vector4.inl.c"
+#include "../src/rfg/library/modules/runtime/graphicsbase/include/keen/graphics/color.inl.c"
+#include "../src/rfg/library/modules/runtime/graphics/include/keen/graphics/texturedescription.hpp.c"
+#include "../src/rfg/library/modules/runtime/graphics/sources/d3d11/texturedata_d3d11.hpp.c"
+#include "../src/rfg/library/modules/runtime/graphics/include/keen/graphics/rendertarget.hpp.c"
+#include "../src/rfg/library/modules/runtime/base/include/keen/base/internallist.hpp.c"

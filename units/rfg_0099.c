@@ -1,0 +1,33 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/common/base/types/geometry/aabb/hkaabb.inl.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/physics/constraintsolver/accumulator/hkpvelocityaccumulator.h.c"
+#include "../src/rfg/volition/rfg/code/vehicle/vehicle_damage_area.h.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/physics2012/dynamics/action/hkpunaryaction.inl.c"
+#include "../src/rfg/volition/rfg/code/vehicle/vehicle_render.h.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/physics2012/vehicle/driverinput/hkpvehicledriverinput.h.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/physics/constraintsolver/vehiclefriction/hkpvehiclefriction.h.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/physics2012/vehicle/simulation/hkpvehiclesimulation.h.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/physics2012/vehicle/hkpvehicleinstance.inl.c"
+#include "../src/rfg/volition/rfg/code/vehicle/havok/hk_custom_vehicle_transmission.h.c"
+#include "../src/rfg/volition/rfg/code/vehicle/havok/hk_custom_vehicle_instance.h.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/physics2012/vehicle/driverinput/default/hkpvehicledefaultanalogdriverinput.h.c"
+#include "../src/rfg/volition/rfg/code/vehicle/havok/hk_custom_vehicle_driver_input.h.c"
+#include "../src/rfg/volition/rfg/code/vehicle/havok/hk_custom_vehicle_engine.h.c"
+#include "../src/rfg/volition/rfg/code/vehicle/automobile.cpp.c"
+#include "../src/rfg/volition/libmodules/havok/hk2014_2_5_r1/source/physics/constraintsolver/vehiclefriction/hkpvehiclefrictionsolver.h.c"
+#include "../src/rfg/volition/rfg/code/vehicle/havok/hk_custom_vehicle_driver_input.cpp.c"
+#include "../src/rfg/volition/rfg/code/vehicle/havok/hk_custom_vehicle_engine.cpp.c"
+#include "../src/rfg/volition/rfg/code/vehicle/havok/hk_custom_vehicle_extra_downforce.cpp.c"
+#include "../src/rfg/volition/rfg/code/vehicle/havok/hk_custom_vehicle_extra_downforce.h.c"
+#include "../src/rfg/volition/rfg/code/vehicle/havok/hk_custom_vehicle_instance.cpp.c"
+#include "../src/rfg/volition/rfg/code/vehicle/havok/hk_custom_vehicle_raycast_wheel_collide.cpp.c"
+#include "../src/rfg/volition/rfg/code/vehicle/havok/hk_wheel_info_contact_body_listener.cpp.c"
+#include "../src/rfg/volition/rfg/code/vehicle/vehicle_audio.cpp.c"
+#include "../src/rfg/volition/rfg/code/vehicle/vehicle_class.cpp.c"

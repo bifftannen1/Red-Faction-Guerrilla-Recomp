@@ -1,0 +1,29 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/rfg/code/camera/camera_lookaround.cpp.c"
+#include "../src/rfg/volition/rfg/code/camera/camera_ms.cpp.c"
+#include "../src/rfg/volition/rfg/code/camera/camera_satellite.cpp.c"
+#include "../src/rfg/volition/rfg/code/camera/camera_shake.cpp.c"
+#include "../src/rfg/volition/rfg/code/camera/camera_slew.cpp.c"
+#include "../src/rfg/volition/rfg/code/objects/ladder.h.c"
+#include "../src/rfg/volition/rfg/code/camera/camera_third_person.cpp.c"
+#include "../src/rfg/volition/rfg/code/camera/camera_transition.cpp.c"
+#include "../src/rfg/volition/rfg/code/effects/object_effect.h.c"
+#include "../src/rfg/volition/rfg/code/camera/camera_view.cpp.c"
+#include "../src/rfg/volition/rfg/code/camera/rfg_camera.cpp.c"
+#include "../src/rfg/volition/rfg/code/camera/camera_cutscene.cpp.c"
+#include "../src/rfg/volition/rfg/code/code_effects/material_effects.h.c"
+#include "../src/rfg/game/build/win32/steam/gog/master/unity_sources/rfg_code_effects_unity.cpp.c"
+#include "../src/rfg/volition/rfg/code/code_effects/blood_pools.cpp.c"
+#include "../src/rfg/volition/rfg/code/objects/movers/general_mover.h.c"
+#include "../src/rfg/volition/rfg/code/code_effects/bullet_sparks.cpp.c"
+#include "../src/rfg/volition/rfg/code/game_render/game_render_task.h.c"
+#include "../src/rfg/volition/vfxlib/code/vfx.h.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system_emitter_instance.inl.c"
+#include "../src/rfg/volition/vfxlib/code/vfx_particle_system_manager.h.c"

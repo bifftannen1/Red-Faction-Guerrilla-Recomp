@@ -1,0 +1,29 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/vlib/code/cfile/keen_cfile.cpp.c"
+#include "../src/rfg/volition/vlib/code/cfile/pc_cfile.h.c"
+#include "../src/rfg/volition/vlib/code/cfile/packfile.cpp.c"
+#include "../src/rfg/volition/vlib/code/cfile/pc_cfile.cpp.c"
+#include "../src/rfg/volition/vlib/code/cfile/vdir.cpp.c"
+#include "../src/rfg/volition/vlib/code/cfile/vdir_internal.cpp.c"
+#include "../src/rfg/library/modules/runtime/base/include/keen/base/profilingtimer.hpp.c"
+#include "../src/rfg/library/modules/runtime/base/sources/win32/profilingtimer_win32.hpp.c"
+#include "../src/rfg/volition/vlib/code/input/input.h.c"
+#include "../src/rfg/volition/vlib/code/input/descent_physics.cpp.c"
+#include "../src/rfg/volition/vlib/code/input/input_internal.h.c"
+#include "../src/rfg/volition/vlib/code/input/input.cpp.c"
+#include "../src/rfg/volition/vlib/code/input/key.cpp.c"
+#include "../src/rfg/volition/vlib/code/input/mouse.cpp.c"
+#include "../src/rfg/volition/vlib/code/input/mouse_generic.cpp.c"
+#include "../src/rfg/volition/vlib/code/math/bbox.cpp.c"
+#include "../src/rfg/volition/vlib/code/math/bbox2d.cpp.c"
+#include "../src/rfg/volition/vlib/code/math/crc.cpp.c"
+#include "../src/rfg/volition/vlib/code/math/floating.cpp.c"
+#include "../src/rfg/volition/vlib/code/math/fp_aabb.cpp.c"
+#include "../src/rfg/volition/vlib/code/math/ix.cpp.c"

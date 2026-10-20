@@ -1,0 +1,29 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/havok_20150629/common/base/math/vector/sse/hkssevector4comparison.inl.c"
+#include "../src/havok_20150629/common/base/math/vector/sse/hkssesimdreal.inl.c"
+#include "../src/havok_20150629/common/base/math/vector/hkvector4fcomparison.inl.c"
+#include "../src/havok_20150629/common/base/math/vector/hksimdfloat32.inl.c"
+#include "../src/havok_20150629/common/base/math/vector/sse/hkssevector4util.inl.c"
+#include "../src/havok_20150629/common/base/math/vector/hkvector4util.inl.c"
+#include "../src/havok_20150629/common/base/math/vector/hkvector4f.inl.c"
+#include "../src/havok_20150629/common/base/math/quaternion/hkquaternionf.inl.c"
+#include "../src/havok_20150629/common/base/math/matrix/hkrotationf.cpp.c"
+#include "../src/havok_20150629/common/base/math/vector/hkvector4f.cpp.c"
+#include "../src/havok_20150629/common/base/math/qstransform/hkqstransformf.inl.c"
+#include "../src/havok_20150629/common/base/container/string/hkstringptr.cpp.c"
+#include "../src/havok_20150629/common/base/memory/system/hkmemorysystem.cpp.c"
+#include "../src/havok_20150629/common/base/memory/system/hkmemorysystem.h.c"
+#include "../src/havok_20150629/common/base/memory/allocator/hkmemoryallocator.cpp.c"
+#include "../src/havok_20150629/common/base/system/io/filesystem/hkfilesystem.cpp.c"
+#include "../src/havok_20150629/common/base/types/hkrefptr.h.c"
+#include "../src/havok_20150629/common/base/container/string/hkstringptr.h.c"
+#include "../src/havok_20150629/common/base/system/io/reader/buffered/hkbufferedstreamreader.h.c"
+#include "../src/havok_20150629/common/base/monitor/hkmonitorstream.cpp.c"
+#include "../src/havok_20150629/common/base/container/pointermap/hkpointermap.h.c"

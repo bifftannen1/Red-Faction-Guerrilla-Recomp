@@ -1,0 +1,30 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/rfg/code/ai/ai_actions.cpp.c"
+#include "../src/rfg/volition/rfg/code/pathfinding/nav_heap.h.c"
+#include "../src/rfg/volition/rfg/code/objects/object_cover_node.h.c"
+#include "../src/rfg/volition/rfg/code/objects/object_navpoint.h.c"
+#include "../src/rfg/volition/rfg/code/objects/object_guard_node.h.c"
+#include "../src/rfg/volition/rfg/code/objects/object_restricted_area.h.c"
+#include "../src/rfg/volition/rfg/code/objects/humans/human_teams.h.c"
+#include "../src/rfg/volition/rfg/code/scripting/action_script/global_event.h.c"
+#include "../src/rfg/volition/rfg/code/objects/object_patrol.h.c"
+#include "../src/rfg/volition/rfg/code/scripting/action_script/global_event_data.h.c"
+#include "../src/rfg/volition/rfg/code/objects/movers/object_mover.h.c"
+#include "../src/rfg/volition/rfg/code/destruction/rfg_mover.h.c"
+#include "../src/rfg/volition/rfg/code/geom/anim.h.c"
+#include "../src/rfg/volition/rfg/code/objects/object_action_node.h.c"
+#include "../src/rfg/volition/rfg/code/objects/humans/human.h.c"
+#include "../src/rfg/volition/rfg/code/objects/humans/player.h.c"
+#include "../src/rfg/volition/rfg/code/ai/ai_building_logic.cpp.c"
+#include "../src/rfg/volition/rfg/code/ai/ai_defense_coordination_internal.h.c"
+#include "../src/rfg/volition/rfg/code/objects/object_item.h.c"
+#include "../src/rfg/volition/rfg/code/weapons/weapons.h.c"
+#include "../src/rfg/volition/rfg/code/ai/percept.h.c"
+#include "../src/rfg/volition/rfg/code/ai/planning.h.c"

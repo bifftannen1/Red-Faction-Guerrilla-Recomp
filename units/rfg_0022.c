@@ -1,0 +1,32 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/render_lib/code/rl_draw.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_dyn_texture.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_mesh_instance.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_fog_volume.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_fog_volume.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_fp_kdtree.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_fp_rbb.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_fp_rbb.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_frustum.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_height_mesh_instance.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_gpu_visibility.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_hdr_compositor.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_hdr_state.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_height_mesh_instance.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_instance_stream.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_landmark_lod_mesh_instance.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_layered_material.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_layered_material.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_light.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_low_lod_mesh_instance.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_low_lod_mesh_instance.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_material.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_material_library.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_material_map.cpp.c"

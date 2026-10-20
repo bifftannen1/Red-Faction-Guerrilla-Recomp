@@ -1,0 +1,29 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/interface_lib/code/objects/animation/vint_object_animation.cpp.c"
+#include "../src/rfg/volition/interface_lib/code/vint_callback.h.c"
+#include "../src/rfg/volition/interface_lib/code/objects/animation/vint_object_tween.cpp.c"
+#include "../src/rfg/volition/interface_lib/code/objects/vint_element_base.h.c"
+#include "../src/rfg/volition/interface_lib/code/objects/drawing/vint_element_point.h.c"
+#include "../src/rfg/volition/interface_lib/code/objects/drawing/vint_element_point.cpp.c"
+#include "../src/rfg/volition/interface_lib/code/resources/vint_resource_bitmap.h.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_bitmap.cpp.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_bitmap_circle.cpp.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_clip.h.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_clip.cpp.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_frame_buffer.h.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_frame_buffer.cpp.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_group.h.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_group.cpp.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_map.cpp.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_text.h.c"
+#include "../src/rfg/volition/interface_lib/code/resources/vint_resource_font.h.c"
+#include "../src/rfg/volition/vlib/code/util/unicode_tools.h.c"
+#include "../src/rfg/volition/vlib/code/util/unicode_tools.inl.c"
+#include "../src/rfg/volition/interface_lib/code/objects/noninteractive/vint_element_text.cpp.c"

@@ -1,0 +1,46 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: sistemas3cecasem <paukarvv@gmail.com>
+Date: Wed, 7 Oct 2026 15:24:15 -0400
+Subject: [PATCH 11/16] native32: save SSE state (xmm, mxcsr) and the published
+ flags per guest thread
+
+regs_t carried the integer, x87 and MMX registers only. A guest thread
+that yielded mid-loop or was switched out at a native call came back to
+another thread's xmm registers. g_xmm/g_mxcsr are now defined here with
+the rest of the register file.
+---
+ runtime/native32/native32.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/runtime/native32/native32.c b/runtime/native32/native32.c
+index 7a6890b..7ed55a7 100644
+--- a/runtime/native32/native32.c
++++ b/runtime/native32/native32.c
+@@ -52,6 +52,11 @@ typedef struct {
+     uint64_t mm[8];
+     xmm_t    xmm[8];
+     uint32_t mxcsr;
++    /* The flags a function returns with (NFSU2 patch 0011, flags part; the
++     * xmm/mxcsr part was already upstream). Without them a guest thread that
++     * yields mid-loop or is preempted at a native call resumes with another
++     * thread's lazy flag state. */
++    uint32_t flag_k, flag_a, flag_b, flag_cf;
+ } regs_t;
+ 
+ static void regs_save(regs_t* r) {
+@@ -61,6 +66,7 @@ static void regs_save(regs_t* r) {
+     memcpy(r->st, g_st, sizeof g_st); r->fp_top = g_fp_top; r->fpu_cw = g_fpu_cw;
+     memcpy(r->mm, g_mm, sizeof g_mm);
+     memcpy(r->xmm, g_xmm, sizeof g_xmm); r->mxcsr = g_mxcsr;
++    r->flag_k = g_flag_k; r->flag_a = g_flag_a; r->flag_b = g_flag_b; r->flag_cf = g_flag_cf;
+ }
+ 
+ static void regs_load(const regs_t* r) {
+@@ -70,6 +76,7 @@ static void regs_load(const regs_t* r) {
+     memcpy(g_st, r->st, sizeof g_st); g_fp_top = r->fp_top; g_fpu_cw = r->fpu_cw;
+     memcpy(g_mm, r->mm, sizeof g_mm);
+     memcpy(g_xmm, r->xmm, sizeof g_xmm); g_mxcsr = r->mxcsr;
++    g_flag_k = r->flag_k; g_flag_a = r->flag_a; g_flag_b = r->flag_b; g_flag_cf = r->flag_cf;
+ }
+ 
+ /* ------------------------------------------------------------- machine lock */

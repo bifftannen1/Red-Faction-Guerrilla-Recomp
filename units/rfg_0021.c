@@ -1,0 +1,29 @@
+/* rfg_codegen.py: pcrecomp lift32, PDB extents, units of whole source files. DO NOT EDIT. */
+#define RECOMP_GENERATED_CODE
+#include "recomp_types.h"
+#include "recomp_funcs.h"
+#include <math.h>
+#include <string.h>
+
+#include "rfg_names.h"
+#include "../src/rfg/volition/render_lib/code/rl_scene_renderer.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_compound_mesh_instance.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_corona_instance.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_corona_instance.inl.c"
+#include "../src/rfg/volition/render_lib/code/rl_particle.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_renderable_particles.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_renderable_particles_instance.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_renderable_particles_instance.inl.c"
+#include "../src/rfg/volition/render_lib/code/rl_particle_renderer.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_renderable_particles_instance_group.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_corona_instance.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_decal.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_morph_weights.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_deformable_mesh_instance.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_morph_target.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_morph_instance.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_deformable_mesh_instance.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_depth_of_field.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_destroyable_model_instance.h.c"
+#include "../src/rfg/volition/render_lib/code/rl_destroyable_model_instance.cpp.c"
+#include "../src/rfg/volition/render_lib/code/rl_distortion.cpp.c"
